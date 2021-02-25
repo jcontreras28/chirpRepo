@@ -8,10 +8,13 @@
             </form>
                 <ul class="chirp-list" style="list-style: none">
                     <% chirps.forEach(chirp => { %>
-                        <li>
+                        <li style="margin-bottom: 20px; border: 2px solid grey; padding: 10px">
                             <%= chirp.id %> - <%= chirp.text %>
                             <form action="/upvote" method="POST">
                                 <button type="submit" name="chirpId" value="<%= chirp.id %>">upvote</button>
+                            </form>
+                            <form action="/downvote" method="POST">
+                                <button type="submit" name="chirpId" value="<%= chirp.id %>">downvote</button>
                             </form>
                             - current upvotes: <%= chirp.upvotes  %>
                         </li>

@@ -45,6 +45,18 @@ app.post('/upvote',async (req, res) => {
     }d
 });
 
+app.post('/downvote',async (req, res) => {
+    try {
+        const thechirp = await Chirps.find({_id: req.body.chirpId});
+        const newUpvote = parseInt(thechirp[0].upvotes) - 1;
+        await Chirps.findByIdAndUpdate(thechirp[0]._id, {upvotes: newUpvote});
+        res.redirect("/index");
+    } catch (err) {
+        console.log('err: ', err);
+        res.redirect("/index");
+    }d
+});
+
 
 
 app.listen(3000, () => console.log("Server Up and running"));
