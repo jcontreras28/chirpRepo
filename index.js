@@ -11,10 +11,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/index',async (req, res) => {
     const chrips = await Chirps.find({}).sort({createdAt: 'descending'}).exec((err, chirps) => {
-        /*let upperCasedChirp = {}
-        for (var chirp in chirps) {
-
-        }*/
+        let upperCasedChirp = {}
+        chirps.forEach (chirp => {
+            chirp.text = chirp.text.toUpperCase();
+        }) 
         res.render("chirps2.ejs", { chirps });
     })
     
@@ -34,15 +34,15 @@ app.post('/',async (req, res) => {
 });
 
 app.post('/upvote',async (req, res) => {
-    console.log('req.body', req.body);
     try {
-        const thechirp = await Chirps.find({_id: req.body});
-        console.log('thechirp: ', thechirp);
-        await Chirps.updateOne({_id: req.body.id}, {upvotes: thechirp.upvotes + 1});
+        const thechirp = await Chirps.find({_id: req.body.chirpId});
+        const newUpvote = parseInt(thechirp[0].upvotes) + 1;
+        await Chirps.findByIdAndUpdate(thechirp[0]._id, {upvotes: newUpvote});
         res.redirect("/index");
     } catch (err) {
+        console.log('err: ', err);
         res.redirect("/index");
-    }
+    }d
 });
 
 

@@ -11,9 +11,9 @@
                         <li>
                             <%= chirp.id %> - <%= chirp.text %>
                             <form action="/upvote" method="POST">
-                                <button type="submit" name="<%= chirp.id %>">upvote</button>
+                                <button type="submit" name="chirpId" value="<%= chirp.id %>">upvote</button>
                             </form>
-                            - current upvotes: <%= chirp.upvotes %>
+                            - current upvotes: <%= chirp.upvotes  %>
                         </li>
                         <% }) %>
                 </ul>
