@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+    <title>Chirps App</title>
+</head>
+    <body>
+        <h1>Chirps</h1> 
+        <ul style="list-style: none">
+            <% chirps.forEach(chirp => { %>
+            <li><%= chirp.id %> - <%= upperCase(chirp.text) %></li>
+            <% }) %>
+        </ul>
+    </body> 
+</html>

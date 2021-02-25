@@ -1,0 +1,22 @@
+<body>
+    <div class="chirp-container">
+        <h2>Chirps</h2>
+        <div class="chirp">
+            <form action="/" method="POST" class="chirp-header">
+                <input type="text" name="content">
+                <button type="submit"><span class="fas fa-plus">Submit Chirp</span></button>
+            </form>
+                <ul class="chirp-list" style="list-style: none">
+                    <% chirps.forEach(chirp => { %>
+                        <li>
+                            <%= chirp.id %> - <%= chirp.text %>
+                            <form action="/upvote" method="POST">
+                                <button type="submit" name="<%= chirp.id %>">upvote</button>
+                            </form>
+                            - current upvotes: <%= chirp.upvotes %>
+                        </li>
+                        <% }) %>
+                </ul>
+        </div>
+    </div>
+</body>
